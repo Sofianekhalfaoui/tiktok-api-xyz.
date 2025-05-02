@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>زيادة مشاهدات TikTok</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #2f2f2f, #1a1a1a);
+      color: white;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: white;
+      cursor: pointer;
+    }
+
+    .message {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>زيادة مشاهدات TikTok</h1>
+  <input type="text" id="link" placeholder="رابط فيديو TikTok">
+  <input type="number" id="count" placeholder="عدد المشاهدات">
+  <button onclick="sendRequest()">إرسال الطلب</button>
+  <div class="message" id="message"></div>
+
+  <script>
+    function sendRequest() {
+      const link = document.getElementById("link").value;
+      const count = parseInt(document.getElementById("count").value);
+      const messageDiv = document.getElementById("message");
+
+      if (!link || !count) {
+        messageDiv.textContent = "يرجى تعبئة كل الحقول.";
+        return;
+      }
+
+      fetch("https://tiktok-api-xyz.onrender.com/sendViews", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ link, count })
+      })
+      .then(response => response.json())
+      .then(data => {
+        messageDiv.textContent = data.message || "تم إرسال الطلب.";
+      })
+      .catch(error => {
+        console.error(error);
+        messageDiv.textContent = "حدث خطأ أثناء إرسال الطلب.";
+      });
+    }
+  </script>
+</body>
+</html>": "application/json" },
+          body: JSON.stringify({ link, count })
+        });
+
+        const data = await res.json();
+        responseBox.textContent = data.message;
+        responseBox.style.color = data.success ? "#00e676" : "red";
+      } catch (err) {
+        responseBox.textContent = "حدث خطأ أثناء إرسال الطلب.";
+        responseBox.style.color = "red";
+      }
+    }
+  </script>
+</body>
+</html>
